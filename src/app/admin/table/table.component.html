@@ -1,0 +1,64 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-11"><h5 class=" text-center">Utenti</h5></div>
+      <div class="col-1">
+        <app-btn-new [routerLink]="['/admin/profile/form','']"></app-btn-new>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <app-filter (filtraEvt)="onFilter($event)" (cancellaEvt)="onDeleteFilter()"></app-filter>
+    <div class="table-responsive">
+      <ngx-datatable
+        [columnMode]="'force'"
+        [footerHeight]="50"
+        [headerHeight]="50"
+        [limit]="10"
+        [rowHeight]="'auto'"
+        [rows]="rows"
+        [scrollbarV]="false"
+        [reorderable]="false"
+        class="bootstrap striped"
+
+      >
+        <!--CODICE FISCALE-->
+        <ngx-datatable-column name="Codice fiscale" prop="codiceFiscale" [resizeable]="false">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template><i>{{ value }}</i></ng-template>
+        </ngx-datatable-column>
+        <!--NOME-->
+        <ngx-datatable-column name="Nome" prop="nome" [resizeable]="false">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template><i>{{ value }}</i></ng-template>
+        </ngx-datatable-column>
+        <!--COGNOME-->
+        <ngx-datatable-column name="Cognome" prop="cognome" [resizeable]="false">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template><i>{{ value }}</i></ng-template>
+        </ngx-datatable-column>
+        <!--RUOLO-->
+        <ngx-datatable-column name="Ruolo" prop="ruolo" [resizeable]="false">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <ng-container *ngIf="row.ruolo.includes('UTENTE')&&row.ruolo.includes('RESPONSABILE')"><i> utente/responsabile </i></ng-container>
+            <ng-container *ngIf="row.ruolo.includes('ADMIN')"><i> amministratore </i></ng-container>
+            <ng-container *ngIf="row.ruolo.includes('UTENTE')&&!row.ruolo.includes('RESPONSABILE')"><i> utente </i></ng-container>
+            <ng-container *ngIf="row.ruolo.includes('RESPONSABILE')&&!row.ruolo.includes('UTENTE')"><i> responsabile </i></ng-container>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Operazioni" [resizeable]="false">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div *ngIf="!row.ruolo.includes('ADMIN')">
+              <app-btn-detail [routerLink]="['/admin/profile', row.codiceFiscale]"></app-btn-detail>
+              <app-btn-delete (click)="onDelete(row)"></app-btn-delete>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+
+</div>
+
+
+
+

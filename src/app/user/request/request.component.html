@@ -1,0 +1,95 @@
+<!--DETTAGLIO-->
+
+<div class="card text-center">
+  <ng-container *ngIf="request$ | async as request">
+    <h5 class="card-header">
+      <label class="align-items-center"> Dettaglio richiesta </label>
+    </h5>
+
+    <div class="card-body list-group">
+      <dl class="row  mr-50 mr-50">
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-3 badge-info text-right"> Data inizio:</dt>
+        <dd class="col-sm-5 badge-light text-left">  {{request.dataInizio | date:"dd/MM/yyyy"}}</dd>
+        <dt class="col-sm-2 "></dt>
+
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-3 badge-info text-right"> Data fine:</dt>
+        <dd class="col-sm-5 badge-light text-left">{{request.dataFine | date:"dd/MM/yyyy"}} </dd>
+        <dt class="col-sm-2 "></dt>
+
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-2 "></dt>
+        <dd class="col-sm-5 badge-light text-left"></dd>
+        <dt class="col-sm-2 "></dt>
+
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-3 badge-info text-right"> Richiedente:</dt>
+        <dd class="col-sm-5 badge-light text-left">{{request.richiedente}} </dd>
+        <dt class="col-sm-2 "></dt>
+
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-3 badge-info  text-right"> Stato:</dt>
+        <dd class="col-sm-5 badge-light text-left">{{request.stato}} </dd>
+        <dt class="col-sm-2 "></dt>
+
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-3 badge-info text-right"> Responsabile:</dt>
+        <dd class="col-sm-5 badge-light text-left">{{request.responsabile}} </dd>
+        <dt class="col-sm-2 "></dt>
+
+        <ng-container *ngIf="request.stato=='RIFIUTATA'">
+          <dt class="col-sm-2 "></dt>
+          <dt class="col-sm-3 badge-info text-right"> Motivo:</dt>
+          <dd class="col-sm-5 badge-light text-left">{{request.motivo}} </dd>
+          <dt class="col-sm-2 "></dt>
+        </ng-container>
+
+        <ng-container *ngIf="request.responsabile">
+          <dt class="col-sm-2 "></dt>
+          <dt class="col-sm-2 "></dt>
+          <dd class="col-sm-5 badge-light text-left"></dd>
+          <dt class="col-sm-2 "></dt>
+
+          <dt class="col-sm-2 "></dt>
+          <dt class="col-sm-3 badge-info text-right"> Responsabile:</dt>
+          <dd class="col-sm-5 badge-light text-left">{{request.responsabile}} </dd>
+          <dt class="col-sm-2 "></dt>
+        </ng-container>
+
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-2 "></dt>
+        <dd class="col-sm-5 badge-light text-left"></dd>
+        <dt class="col-sm-2 "></dt>
+
+        <dt class="col-sm-2"></dt>
+        <dt class="col-sm-3 badge-info  text-right"> Data creazione:</dt>
+        <dd class="col-sm-5 badge-light text-left">{{request.dataCreazione | date:"dd/MM/yyyy hh:mm"}} </dd>
+        <dt class="col-sm-2 "></dt>
+
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-3 badge-info  text-right"> Data ultima modifica:</dt>
+        <dd class="col-sm-5 badge-light text-left">{{request.dataModifica | date:"dd/MM/yyyy hh:mm"}} </dd>
+        <dt class="col-sm-2 "></dt>
+
+
+      </dl>
+    </div>
+    <div class="card-footer text-center">
+
+      <div class="btn-group">
+        <ng-container *ngIf="request.stato=='BOZZA'||request.stato=='IN_MODIFICA'">
+          <button type="button" class="btn btn-success " (click)="onSubscribeReq(request)"> Sottoscrivi</button>
+        </ng-container>
+        <ng-container *ngIf="request.stato=='BOZZA'||request.stato=='IN_MODIFICA' || request.stato=='RIFIUTATA'">
+          <button type="button" class="btn btn-primary" [routerLink]="['/user/richieste/form', request.id]"> Modifica
+          </button>
+        </ng-container>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">Chiudi</button>
+      </div>
+
+    </div>
+  </ng-container>
+</div>
+
+

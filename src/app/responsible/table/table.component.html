@@ -1,0 +1,47 @@
+<div class="card m-4">
+  <div class="card-header text-center"><h5>Richieste</h5></div>
+  <div class="card-body">
+    <app-filter (filtraEvt)="onFilter($event)" (cancellaEvt)="updateTable()"></app-filter>
+    <div class="table-responsive">
+      <ngx-datatable
+        [columnMode]="'force'"
+        [footerHeight]="50"
+        [headerHeight]="50"
+        [limit]="10"
+        [reorderable]="false"
+        [rowHeight]="'auto'"
+        [rows]="rows"
+        [scrollbarV]="false"
+        [scrollbarH]="true"
+        class="bootstrap striped">
+        <!--Richiedente-->
+        <ngx-datatable-column [resizeable]="false" name="Richiedente" prop="richiedente">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template><i>{{ value }}</i></ng-template>
+        </ngx-datatable-column>
+        <!--Data inizio-->
+        <ngx-datatable-column [resizeable]="false" name="Data inizio" prop="dataInizio">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <i>{{ value | date: "dd/MM/yyyy"}}</i></ng-template>
+        </ngx-datatable-column>
+        <!--data fine-->
+        <ngx-datatable-column [resizeable]="false" name="Data fine" prop="dataFine">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <i>{{ value | date: "dd/MM/yyyy"}}</i></ng-template>
+        </ngx-datatable-column>
+        <!--Stato-->
+        <ngx-datatable-column [resizeable]="false" name="Stato" prop="stato">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template><i>{{ value }}</i></ng-template>
+        </ngx-datatable-column>
+        <!--Bottoni-->
+        <ngx-datatable-column [resizeable]="false" name="Operazioni" [sortable]="false">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div>
+              <app-btn-detail [routerLink]="['/responsible/richieste/dettaglio', row.id]"></app-btn-detail>
+              <app-btn-delete (click)="onDeleteSelect(row)"></app-btn-delete>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

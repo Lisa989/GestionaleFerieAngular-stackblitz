@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header text-center">
+    <div class="row">
+      <div class="col-11"><h5> Tabella richieste </h5></div>
+      <div class="col-1">
+        <app-btn-new [routerLink]="['form', '']"></app-btn-new>
+      </div>
+    </div>
+  </div>
+  <div class="card-body table table-responsive">
+    <app-filter (filtraEvt)="onFilter($event)" (cancellaEvt)="onDeleteFilter()"></app-filter>
+    <ngx-datatable
+      [columnMode]="'force'"
+      [footerHeight]="50"
+      [headerHeight]="50"
+      [limit]="10"
+      [reorderable]="false"
+      [rowHeight]="'auto'"
+      [rows]="rows"
+      [scrollbarV]="false"
+      class="bootstrap striped"
+
+    >
+      <!--Data inizio-->
+      <ngx-datatable-column [resizeable]="false" name="Data inizio" prop="dataInizio">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template><i>{{ value | date: "dd/MM/yyyy"}}</i></ng-template>
+      </ngx-datatable-column>
+      <!--data fine-->
+      <ngx-datatable-column [resizeable]="false" name="Data fine" prop="dataFine">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template><i>{{ value | date: "dd/MM/yyyy"}}</i></ng-template>
+      </ngx-datatable-column>
+      <!--Stato-->
+      <ngx-datatable-column [resizeable]="false" name="Stato" prop="stato">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template><i>{{ value }}</i></ng-template>
+      </ngx-datatable-column>
+      <!--Bottoni-->
+      <ngx-datatable-column [resizeable]="false" name="Operazioni" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <app-btn-detail [routerLink]="['dettaglio', row.id]"></app-btn-detail>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<ng-template #popTitle><b>Utente</b></ng-template>
+<ng-template #popContent>
+  <p><b>Nome:</b> {{getUserName()}}</p>
+  <p><b>Cognome:</b> {{getUserCognome()}}</p>
+  <p><b>Ruolo:</b> {{getUserRole()}}</p>
+</ng-template>
+<label [ngbPopover]="popContent"
+       [popoverTitle]="'Utente'"
+       class="p-2 label-light">
+  <fa-icon [icon]="faUser"></fa-icon>
+  {{getUserName()}}
+</label>
+<button class="btn btn-outline-light my-2 my-sm-0" (click)="logout()">Logout</button>

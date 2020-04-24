@@ -1,0 +1,56 @@
+<div class="card">
+  <h5 class="card-header text-center">{{title}}</h5>
+  <div class="card-body" *ngIf="init">
+    <form [formGroup]="reqForm" (ngSubmit)="onSubmit()" class="text-center">
+      <div class="form-group row">
+        <div class="col"></div>
+        <div class="col"><label for="inizio" class="col-form-label">Data inizio</label></div>
+        <div class="col">
+          <input id="inizio"
+                 type="date"
+                 class="form-control"
+                 formControlName="inizio"
+                 [ngClass]="{ 'is-invalid': inizio.invalid && (inizio.touched || inizio.dirty)}">
+          <div *ngIf="inizio.invalid && (inizio.touched || inizio.dirty)" class="text-danger">
+            <div *ngIf="inizio.errors.required">
+              Campo data inizio ferie richiesto.
+            </div>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col"></div>
+        <div class="col"><label for="fine" class="col-form-label">Data fine</label></div>
+        <div class="col">
+          <input id="fine"
+                 type="date"
+                 class="form-control"
+                 formControlName="fine"
+                 [ngClass]="{ 'is-invalid': fine.invalid && (fine.touched || fine.dirty)}">
+          <div *ngIf="fine.invalid && (fine.dirty || fine.touched)" class="text-danger">
+            <div *ngIf="fine.errors.required">
+              Campo data fine ferie richiesto.
+            </div>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+
+      <div *ngIf="reqForm.errors?.errorePeriodo && (reqForm.touched || reqForm.dirty)"
+           class="cross-validation-error-message alert alert-danger">
+        Periodo non valido.
+      </div>
+
+      <div class="btn-group text-center">
+        <button type="submit" class="button btn btn-primary" [disabled]="!reqForm.valid">Salva</button>
+        <button type="button" class="button btn btn-secondary" (click)="onClose()" >Chiudi</button>
+      </div>
+    </form>
+
+  </div>
+  <!--<div class="card-footer text-center">
+    <p> Form Status: {{ reqForm.status }}  </p>
+  </div>-->
+</div>

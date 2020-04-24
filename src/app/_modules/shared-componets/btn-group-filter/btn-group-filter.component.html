@@ -1,0 +1,10 @@
+<div class="btn-group" role="group">
+  <button class="button btn btn-success" triggers="mouseenter:mouseleave" ngbPopover="Filtra" (click)="filterEvt.emit()">
+    <fa-icon [icon]="faCheck"></fa-icon>
+  </button>
+
+  <button class="button btn btn-danger" triggers="mouseenter:mouseleave" ngbPopover="Cancella" (click)="deleteEvt.emit()">
+    <fa-icon [icon]="faTimes"></fa-icon>
+  </button>
+
+</div>

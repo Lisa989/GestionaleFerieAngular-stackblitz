@@ -1,0 +1,110 @@
+<!--RICHIESTA MOTIVO-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Inserire il motivo</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="motivo">Motivo rifiuto richiesta</label>
+        <div class="input-group">
+          <input id="motivo" class="form-control" placeholder="motivo" name="dp" [(ngModel)]="motivo">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Invia</button>
+  </div>
+</ng-template>
+
+<!--DETTAGLIO-->
+<div class="card text-center">
+  <h5 class="card-header">
+    <label class="align-items-center"> Dettaglio richiesta </label>
+  </h5>
+  <ng-container *ngIf="request$ | async as request">
+    <div class="card-body list-group">
+      <dl class="row  mr-50 mr-50">
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-3 badge-info text-right"> Data inizio:</dt>
+        <dd class="col-sm-5 badge-light text-left">  {{request.dataInizio | date:"dd/MM/yyyy"}}</dd>
+        <dt class="col-sm-2 "></dt>
+
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-3 badge-info text-right"> Data fine:</dt>
+        <dd class="col-sm-5 badge-light text-left">{{request.dataFine | date:"dd/MM/yyyy"}} </dd>
+      <dt class="col-sm-2 "></dt>
+
+      <dt class="col-sm-2 "></dt>
+      <dt class="col-sm-2 "></dt>
+      <dd class="col-sm-5 badge-light text-left"></dd>
+      <dt class="col-sm-2 "></dt>
+
+      <dt class="col-sm-2 "></dt>
+      <dt class="col-sm-3 badge-info text-right"> Richiedente:</dt>
+      <dd class="col-sm-5 badge-light text-left">{{request.richiedente}} </dd>
+      <dt class="col-sm-2 "></dt>
+
+      <dt class="col-sm-2 "></dt>
+      <dt class="col-sm-3 badge-info  text-right"> Stato:</dt>
+      <dd class="col-sm-5 badge-light text-left">{{request.stato}} </dd>
+      <dt class="col-sm-2 "></dt>
+
+      <ng-container *ngIf="request.stato=='RIFIUTATA'">
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-3 badge-info text-right"> Motivo:</dt>
+        <dd class="col-sm-5 badge-light text-left">{{request.motivo}} </dd>
+        <dt class="col-sm-2 "></dt>
+      </ng-container>
+
+      <ng-container *ngIf="request.responsabile">
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-2 "></dt>
+        <dd class="col-sm-5 badge-light text-left"></dd>
+        <dt class="col-sm-2 "></dt>
+
+        <dt class="col-sm-2 "></dt>
+        <dt class="col-sm-3 badge-info text-right"> Responsabile:</dt>
+        <dd class="col-sm-5 badge-light text-left">{{request.responsabile}} </dd>
+        <dt class="col-sm-2 "></dt>
+      </ng-container>
+
+      <dt class="col-sm-2 "></dt>
+      <dt class="col-sm-2 "></dt>
+      <dd class="col-sm-5 badge-light text-left"></dd>
+      <dt class="col-sm-2 "></dt>
+
+      <dt class="col-sm-2"></dt>
+      <dt class="col-sm-3 badge-info  text-right"> Data creazione:</dt>
+      <dd class="col-sm-5 badge-light text-left">{{request.dataCreazione | date:"dd/MM/yyyy hh:mm"}} </dd>
+      <dt class="col-sm-2 "></dt>
+
+      <dt class="col-sm-2 "></dt>
+      <dt class="col-sm-3 badge-info  text-right"> Data ultima modifica:</dt>
+      <dd class="col-sm-5 badge-light text-left">{{request.dataModifica | date:"dd/MM/yyyy hh:mm"}} </dd>
+      <dt class="col-sm-2 "></dt>
+
+
+    </dl>
+  </div>
+  <div class="card-footer text-center">
+    <div class="btn-group m-2">
+      <ng-container *ngIf="request.stato=='IN_ATTESA_DI_APPROVAZIONE'">
+        <button type="button" class="btn btn-success" (click)="onAccept(request.id)"> Accetta</button>
+      </ng-container>
+      <ng-container *ngIf="request.stato=='IN_ATTESA_DI_APPROVAZIONE'">
+        <button type="button" class="btn btn-danger " (click)="onReject(content, request.id);"> Rifiuta</button>
+      </ng-container>
+    </div>
+
+    <div class="btn-group m-2">
+      <button type="button" class="btn btn-danger" (click)="onDelete(request)">Elimina</button>
+      <button type="button" class="btn btn-secondary" (click)="onClose()">Chiudi</button>
+    </div>
+  </div>
+  </ng-container>
+</div>

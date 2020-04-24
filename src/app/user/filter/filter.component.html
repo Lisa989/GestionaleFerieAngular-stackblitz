@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-body text-center">
+    <div class="mr-sm-5"><h5>FILTRO</h5></div>
+
+    <label class="mr-sm-3" > periodo
+      <input type="date" placeholder="INIZIO" [(ngModel)]="filtro.dataInizio" class="text-center" triggers="mouseenter:mouseleave" ngbPopover="inizio ferie">
+      -
+      <input type="date" placeholder="FINE" [(ngModel)]="filtro.dataFine" class="text-center" triggers="mouseenter:mouseleave" ngbPopover="fine ferie">
+
+    </label>
+    <!--<label class="mr-sm-3" triggers="mouseenter:mouseleave" ngbPopover="fine ferie"> fine
+      <input type="date" placeholder="FINE" [(ngModel)]="filtro.dataFine" class="text-center">
+    </label>-->
+    <label class="mr-sm-3" triggers="mouseenter:mouseleave" ngbPopover="stato"> stato
+      <select [(ngModel)]="filtro.stato" class="text-center">
+        <!--<option *ngFor="let state of states" [ngValue]="state">{{state.name}}</option>-->
+        <option value=''> - </option>
+        <option value="{{stateType.BOZZA}}">BOZZA</option>
+        <option value="{{stateType.IN_MODIFICA}}">IN MODIFICA</option>
+        <option value="{{stateType.IN_ATTESA_DI_APPROVAZIONE}}">IN ATTESA DI APPROVAZIONE</option>
+        <option value="{{stateType.APPROVATA}}">APPROVATA</option>
+        <option value="{{stateType.RIFIUTATA}}">RIFIUTATA</option>
+      </select>
+    </label>
+    <label class="mr-sm-3" triggers="mouseenter:mouseleave" ngbPopover="responsabile">
+      <input type="text" placeholder="CF RESPONSABILE" [(ngModel)]="filtro.responsabile" class="text-center">
+    </label>
+
+    <app-btn-group-filter (filterEvt)="onFilter()" (deleteEvt)="cancellaFiltro()"></app-btn-group-filter>
+
+  </div>
+</div>

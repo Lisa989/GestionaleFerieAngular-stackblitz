@@ -1,0 +1,155 @@
+<div class="card">
+  <ng-container *ngIf="init">
+    <h5 class="card-header text-center">{{title}}</h5>
+    <div class="card-body">
+
+      <form [formGroup]="userForm" class="text-center align-content-center p-5 form-horizontal">
+        <!--NOME-->
+        <div class="row form-group">
+          <div class="col-2"></div>
+          <div class="col-3 text-right">
+            <label for="nome" class="form-label"> Nome: </label>
+          </div>
+          <div class="col-5">
+            <input formControlName="nome"
+                   id="nome"
+                   type="text"
+                   class="form-control"
+                   [ngClass]="{ 'is-invalid': nome.invalid && (nome.touched || nome.dirty)}">
+            <div *ngIf="nome.invalid && (nome.touched || nome.dirty)" class="text-danger">
+              <div *ngIf="nome.errors.required">Campo 'nome' richiesto.</div>
+            </div>
+          </div>
+          <div class="col-2"></div>
+        </div>
+
+        <!--COGNOME-->
+        <div class="row form-group">
+          <div class="col-2"></div>
+          <div class="col-3 text-right">
+            <label for="cognome" class="form-label">Cognome: </label>
+          </div>
+          <div class="col-5">
+            <input formControlName="cognome"
+                   id="cognome"
+                   type="text"
+                   class="form-control"
+                   [ngClass]="{ 'is-invalid': cognome.invalid && (cognome.touched || cognome.dirty)}">
+            <div *ngIf="cognome.invalid && (cognome.touched || cognome.dirty)" class="text-danger">
+              <div *ngIf="cognome.errors.required">Campo 'cognome' richiesto.</div>
+            </div>
+          </div>
+          <div class="col-2"></div>
+        </div>
+
+        <!--CF-->
+        <div class="form-group row">
+          <div class="col-2"></div>
+          <div class="col-3 text-right">
+            <label for="codice" class="form-label">Codice Fiscale: </label>
+          </div>
+          <div class="col-5">
+            <input formControlName="codiceFiscale"
+                   id="codice"
+                   type="text"
+                   class="form-control"
+                   [ngClass]="{ 'is-invalid': codiceFiscale.invalid && (codiceFiscale.touched || codiceFiscale.dirty)}">
+            <div *ngIf="codiceFiscale.invalid && (codiceFiscale.touched || codiceFiscale.dirty)" class="text-danger">
+              <div *ngIf="codiceFiscale.errors.required">Campo 'codice fiscale' richiesto.</div>
+            </div>
+          </div>
+          <div class="col-2"></div>
+        </div>
+        <br>
+
+        <!--TELEFONO-->
+        <div class="form-group row">
+          <div class="col-2"></div>
+          <div class="col-3 text-right">
+            <label for="tel" class="form-label">Telefono: </label>
+          </div>
+          <div class="col-5">
+            <input formControlName="telefono"
+                   id="tel"
+                   type="number"
+                   class="form-control"
+                   [ngClass]="{ 'is-invalid': telefono.invalid && (telefono.touched || telefono.dirty)}">
+            <div *ngIf="telefono.invalid && (telefono.touched || telefono.dirty)" class="text-danger">
+              <div *ngIf="telefono.errors.valid">Campo telefono errato</div>
+            </div>
+          </div>
+          <div class="col-2"></div>
+        </div>
+
+        <!--EMAIL-->
+        <div class="form-group row">
+          <div class="col-2"></div>
+          <div class="col-3 text-right">
+            <label for="email" class="form-label">Email: </label>
+          </div>
+          <div class="col-5">
+            <input formControlName="email"
+                   id="email"
+                   type="email"
+                   class="form-control"
+                   [ngClass]="{ 'is-invalid': email.invalid && (email.touched || email.dirty)}">
+            <div *ngIf="email.invalid && (email.touched || email.dirty)" class="text-danger">
+              <div *ngIf="email.errors.required">Campo 'email' richiesto</div>
+              <div *ngIf="email.errors.email">Campo 'email' non valido</div>
+            </div>
+          </div>
+          <div class="col-2"></div>
+        </div>
+
+        <!--PASSWORD-->
+        <div class="form-group row">
+          <div class="col-2"></div>
+          <div class="col-3 text-right">
+            <label for="pwd" class="form-label">Password: </label>
+          </div>
+          <div class="col-5">
+            <input formControlName="password"
+                   id="pwd"
+                   type="password"
+                   class="form-control"
+                   [ngClass]="{ 'is-invalid': password.invalid && (password.touched || password.dirty)}">
+            <div *ngIf="password.invalid && (password.touched || password.dirty)" class="invalid-feedback">
+              <div *ngIf="password.errors.required">Campo 'password' richiesto</div>
+              <div *ngIf="password.errors.valid">Lunghezza 'password' errata (min 3)</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2"></div>
+        <br>
+
+        <!--RUOLO-->
+        <div class="form-group row">
+          <div class="col-2"></div>
+          <div class="col-3 text-right">
+            <label for="ruolo" class="form-label">Ruolo</label>
+          </div>
+          <div class="col-5 text-left">
+            <div id="ruolo" *ngFor="let r of getControls(); let i = index">
+              <div class="form-check">
+                <label formArrayName="ruolo" class="form-check-label">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         [formControlName]="i">
+                  {{ruoliType[i]}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-2"></div>
+        </div>
+      </form>
+    </div>
+
+    <div class="card-footer text-center btn-group">
+        <button type="submit" class="btn btn-primary m-2" [disabled]="!userForm.valid" (click)="onSubmit()">Salva
+        </button>
+        <button type="button" class="btn btn-danger m-2" (click)="clear()">Reset</button>
+        <button type="button" class="btn btn-secondary m-2" (click)="clickClose()">Chiudi</button>
+      </div>
+  </ng-container>
+</div>

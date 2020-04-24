@@ -1,0 +1,39 @@
+/* Add application styles & imports to this file! *//* You can add global styles to this file, and also import other style files*/
+/*@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/themes/bootstrap.css';
+@import '~@swimlane/ngx-datatable/themes/dark.css';
+@import '~ngx-toastr/toastr.css';*/
+
+html, body, .container, .container-fluid {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  padding-top: 70px;
+}
+
+
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell{
+  background-color: #343a40 !important;
+  color: #fff!important;
+  font-size: large !important;
+  text-align: center;
+}
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell {
+  text-align: center !important;
+
+}
+
+.ngx-datatable.bootstrap{
+  border: 1px solid #eceeef !important;
+}
+
+.toast-top-center {
+  top: 10% !important;
+  right: 0;
+  width: 100%;
+}

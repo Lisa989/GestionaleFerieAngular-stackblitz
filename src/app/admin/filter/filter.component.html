@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-body text-center">
+    <label class="mr-lg-5"><strong>FILTRO</strong></label>
+
+    <label class="mr-sm-3" triggers="mouseenter:mouseleave" ngbPopover="codice fiscale">
+      <input type="text" placeholder="CF" [(ngModel)]="filtro.codiceFiscale" class="text-center">
+    </label>
+    <label class="mr-sm-3" triggers="mouseenter:mouseleave" ngbPopover="nome">
+      <input type="text" placeholder="NOME" [(ngModel)]="filtro.nome" class="text-center">
+    </label>
+    <label class="mr-sm-3" triggers="mouseenter:mouseleave" ngbPopover="cognome">
+      <input type="text" placeholder="COGNOME" [(ngModel)]="filtro.cognome" class="text-center">
+    </label>
+    <label class="mr-sm-3" triggers="mouseenter:mouseleave" ngbPopover="ruolo">
+      <!--<input type="text" placeholder="RUOLO" [(ngModel)]="filtro.ruolo" class="text-center">-->
+      <input type="checkbox" [(ngModel)]="filtro.ruoloResponsabile" data-md-icheck (change)="toggleVisibility($event)"/>
+      Responsabile
+    </label>
+    <label class="mr-sm-3" triggers="mouseenter:mouseleave" ngbPopover="ruolo">
+      <!--<input type="text" placeholder="RUOLO" [(ngModel)]="filtro.ruolo" class="text-center">-->
+      <input type="checkbox" [(ngModel)]="filtro.ruoloUtente" data-md-icheck (change)="toggleVisibility($event)"/>
+      Utente
+    </label>
+
+    <!--<div class="btn-group" role="group">
+      <app-btn-filter (click)="filtraUtenti()"></app-btn-filter>
+      <app-btn-del-filter (click)="cancellaFiltro()"></app-btn-del-filter>
+    </div>-->
+    <app-btn-group-filter (filterEvt)="filtraUtenti()" (deleteEvt)="cancellaFiltro()"></app-btn-group-filter>
+
+  </div>
+</div>
